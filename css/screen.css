@@ -637,6 +637,14 @@ input::placeholder {
     margin-right: var(--global-whitespace-sm);
 }
 
+.c-option-list {
+    margin-bottom: calc(3 * var(--global-baseline));
+}
+
+.c-option-list__item {
+    margin-bottom: calc(1.5 * var(--global-baseline));
+}
+
 .c-option--hidden:checked + .c-custom-option {
     /*
         Do magic stuff here, for example:
@@ -650,22 +658,32 @@ input::placeholder {
         fill: blue;
     */
     opacity: 1;
+    transform: scale(1);
+}
+
+.c-option--hidden:focus + .c-custom-option .c-custom-option__fake-input {
+    border-color: var(--global-color-alpha);
+    box-shadow: var(--global-input-boxShadow);
 }
 
 .c-custom-option {
+    --custom-option-borderColor: var(--global-input-borderColor);
+    --custom-option-focus-borderColor: var(--global-input-focus-borderColor);
     display: flex;
 }
 
 .c-custom-option__symbol {
-    /* opacity: 0; */
     display: block;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 150ms ease-in, transform 150ms cubic-bezier(0.735, -0.075, 0.585, 2);
 }
 
 .c-custom-option__fake-input {
     display: flex;
     width: 16px;
     height: 16px;
-    border: 1px solid var(--global-color-neutral-xxx-light);
+    border: 1px solid var(--custom-option-borderColor);
     margin-right: 8px;
     display: flex;
     align-items: center;
@@ -685,7 +703,6 @@ input::placeholder {
     height: 10px;
     fill: none;
     fill: var(--global-color-alpha);
-    opacity: 0;
 }
   
 .c-custom-option__fake-input--radio .c-custom-option__symbol {
@@ -693,7 +710,10 @@ input::placeholder {
     height: 6px;
     border-radius: 100%;
     background-color: var(--global-color-alpha);
-    opacity: 0;
+}
+
+.c-option--hidden {
+    
 }
 
 /*
