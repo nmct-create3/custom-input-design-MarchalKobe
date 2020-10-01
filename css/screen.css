@@ -680,7 +680,6 @@ input::placeholder {
 }
 
 .c-custom-option__fake-input {
-    display: flex;
     width: 16px;
     height: 16px;
     border: 1px solid var(--custom-option-borderColor);
@@ -712,8 +711,85 @@ input::placeholder {
     background-color: var(--global-color-alpha);
 }
 
-.c-option--hidden {
-    
+.c-custom-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.c-custom-toggle__fake-input {
+    width: 48px;
+    height: 24px;
+    border: 1px solid var(--global-input-borderColor);
+    margin-right: 8px;
+    background-color: var(--global-color-neutral-xxxx-light);
+    border-radius: 24px;
+}
+
+.c-custom-toggle__fake-input::after {
+    content: "";
+    display: block;
+    width: 22px;
+    height: 22px;
+    background-color: white;
+    border-radius: 22px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
+    transition: all 150ms ease;
+}
+
+.c-option--hidden:checked + .c-custom-toggle .c-custom-toggle__fake-input {
+    background-color: var(--global-color-alpha);
+    border-color: var(--global-color-alpha-dark);
+}
+
+.c-option--hidden:checked + .c-custom-toggle .c-custom-toggle__fake-input::after {
+    transform: translateX(24px);
+}
+
+.c-option--hidden:focus + .c-custom-toggle .c-custom-toggle__fake-input {
+    border-color: var(--global-color-alpha);
+    box-shadow: var(--global-input-boxShadow);
+}
+
+.c-option--hidden:active + .c-custom-toggle .c-custom-toggle__fake-input::after {
+    width: 28px;
+}
+
+.c-option--hidden:active:checked + .c-custom-toggle .c-custom-toggle__fake-input::after {
+    width: 28px;
+    transform: translateX(18px);
+}
+
+.c-custom-toggle--inverted {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.c-custom-toggle--inverted .c-custom-toggle__fake-input {
+    margin-right: 0;
+}
+
+.c-toggle-list__item {
+    margin-bottom: 12px;
+}
+
+.c-toggle-list__item + .c-toggle-list__item {
+    padding-top: 12px;
+    border-top: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+.c-custom-select {
+    display: block;
+    position: relative;
+}
+
+.c-custom-select__symbol {
+    width: 24px;
+    height: 24px;
+    fill: var(--global-color-neutral-x-light);
+    position: absolute;
+    top: 11px;
+    right: 11px;
 }
 
 /*
