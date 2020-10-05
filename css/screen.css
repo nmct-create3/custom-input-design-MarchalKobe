@@ -58,13 +58,43 @@
     --global-whitespace-xxl: calc(var(--global-whitespace) * 3); /*  = 72px */
 
     /* Global vars */
+    --global-label-color: var(--global-color-neutral-xx-dark);
     --global-input-backgroundColor: White;
     --global-input-color: var(--global-color-neutral-xxxx-dark);
     --global-input-borderColor: var(--global-color-neutral-xxx-light);
     --global-input-hover-borderColor: var(--global-color-neutral-xx-light);
     --global-input-focus-borderColor: var(--global-color-alpha);
     --global-input-boxShadow: 0 0 0 3px var(--global-color-alpha-x-transparent);
+
+    --global-page-color: var(--global-color-neutral-xxxx-dark);
+    --global-page-backgroundColor: var(--global-color-neutral-xxxx-light);
+
+    --card-backgroundColor: White;
+    --card__footer-borderColor: var(--global-color-neutral-xxx-light);
 }
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --global-page-color: White;
+        --global-page-backgroundColor: var(--global-color-neutral-xxxx-dark);
+
+        --global-label-color: var(--global-color-neutral-xx-light);
+        --global-input-backgroundColor: var(--global-color-neutral-xxxx-dark);
+        --global-input-color: var(--global-color-neutral-xxxx-light);
+        --global-input-borderColor: var(--global-input-backgroundColor);
+        --global-input-hover-borderColor: var(--global-input-backgroundColor);
+        --global-input-focus-borderColor: var(--global-input-backgroundColor);
+    }
+}
+
+/* --global-label-color: var(--global-color-neutral-xx-dark);
+--global-placeholder-color: var(--global-color-neutral-x-light);
+--global-input-backgroundColor: White;
+--global-input-color: var(--global-color-neutral-xxxx-dark);
+--global-input-borderColor: var(--global-color-neutral-xxx-light);
+--global-input-hover-borderColor: var(--global-color-neutral-xx-light);
+--global-input-focus-borderColor: var(--global-color-alpha);
+--global-input-boxShadow: 0 0 0 3px var(--global-color-alpha-x-transparent); */
 
 /*------------------------------------*\
 #GENERIC
@@ -80,8 +110,8 @@ html {
     font-size: 16px;
     line-height: 1.5;
     font-family: "Inter Web", Helvetica, arial, sans-serif;
-    color: var(--global-color-neutral-xxxx-dark);
-    background-color: var(--global-color-neutral-xxxx-light);
+    color: var(--global-page-color); 
+    background-color: var(--global-page-backgroundColor);
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;    
@@ -522,16 +552,24 @@ input::placeholder {
 }
 
 .c-logo__path--1 {
-    fill: var(--global-color-neutral-xxxx-dark);
-}
+    fill: var(--logo__path--1--fill, var(--global-color-neutral-xxxx-dark));
+  }
+  
+  .c-logo__path--2 {
+    fill: var(--logo__path--2--fill, var(--global-color-alpha));
+  }
+  
+  .c-logo__path--3 {
+    fill: var(--logo__path--3--fill, var(--global-color-alpha-x-dark));
+  }
 
-.c-logo__path--2 {
-    fill: var(--global-color-alpha);
-}
-
-.c-logo__path--3 {
-    fill: var(--color-alpha-x-dark);
-}
+  @media (prefers-color-scheme: dark) {
+    .c-logo {
+      --logo__path--1--fill: White;
+      --logo__path--2--fill: var(--logo__path--1--fill);
+      --logo__path--3--fill: var(--logo__path--1--fill);
+    }
+  }
 
 /*
     Component: Card
@@ -540,7 +578,7 @@ input::placeholder {
 */
 
 .c-card {
-    background-color: White;
+    background-color: var(--card-backgroundColor);
     margin-bottom: var(--global-whitespace);
     border-radius: var(--global-borderRadius);
     box-shadow: 0 0 0 var(--global-borderWidth) rgba(0,0,0, 0.05), 0 2px 4px rgba(0,0,0,.075);
@@ -555,7 +593,7 @@ input::placeholder {
 
 .c-card__footer {
     text-align: center;
-    border-top: var(--global-borderWidth) solid var(--global-color-neutral-xxx-light);
+    border-top: var(--global-borderWidth) solid var(--card__footer-borderColor);
 }
 
 .c-card__title {
@@ -563,6 +601,13 @@ input::placeholder {
     font-size: 18px;
     line-height: calc(var(--global-baseline) * 3);
     font-weight: 600;
+}
+
+@media (prefers-color-scheme: dark) {
+    .c-card {
+        --card-backgroundColor: var(--global-color-neutral-xxx-dark);
+        --card__footer-borderColor: var(--global-color-neutral-xxxx-dark);
+    }
 }
 
 /* This allows c-card__body and __footer to have equal padding everywhere */
@@ -687,6 +732,7 @@ input::placeholder {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: var(--global-input-backgroundColor);
 }
 
 .c-custom-option__fake-input--checkbox {
@@ -723,6 +769,7 @@ input::placeholder {
     margin-right: 8px;
     background-color: var(--global-color-neutral-xxxx-light);
     border-radius: 24px;
+    background: var(--global-input-backgroundColor);
 }
 
 .c-custom-toggle__fake-input::after {
@@ -734,6 +781,7 @@ input::placeholder {
     border-radius: 22px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
     transition: all 150ms ease;
+    background: var(--global-input-backgroundColor);
 }
 
 .c-option--hidden:checked + .c-custom-toggle .c-custom-toggle__fake-input {
@@ -783,6 +831,10 @@ input::placeholder {
     position: relative;
 }
 
+.c-custom-select__input {
+    color: var(--global-label-color);
+}
+
 .c-custom-select__symbol {
     width: 24px;
     height: 24px;
@@ -803,7 +855,7 @@ input::placeholder {
     font-size: 14px;
     padding-bottom: var(--global-whitespace-xs);    
     line-height: calc(var(--global-baseline) * 2);
-    color: var(--global-color-neutral-xx-dark);
+    color: var(--global-label-color);
 }
 
 .c-label--option {
